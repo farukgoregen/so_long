@@ -6,7 +6,7 @@
 /*   By: omgorege <omgorege@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:23:24 by omgorege          #+#    #+#             */
-/*   Updated: 2025/01/27 16:30:23 by omgorege         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:25:07 by omgorege         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@ static void	key_w(t_maps *data)
 {
 	if (data->map[data->y - 1][data->x] != '1')
 	{
+		if (data->map[data->y - 1][data->x] == 'E' && data->coin != 0)
+			return ;
 		data->mov++;
+		ft_printf("%d\n", data->mov);
 		if (data->map[data->y - 1][data->x] == 'C')
 			data->coin--;
 		if (data->map[data->y - 1][data->x] == 'E' && data->coin == 0)
 			mlxend_free(data);
-		if (data->map[data->y - 1][data->x] == 'E')
-		{
-			data->mov--;
-			return ;
-		}
 		else
 		{
 			data->map[data->y][data->x] = '0';
@@ -39,16 +37,14 @@ static void	key_s(t_maps *data)
 {
 	if (data->map[data->y + 1][data->x] != '1')
 	{
+		if (data->map[data->y + 1][data->x] == 'E' && data->coin != 0)
+			return ;
 		data->mov++;
+		ft_printf("%d\n", data->mov);
 		if (data->map[data->y + 1][data->x] == 'C')
 			data->coin--;
 		if (data->map[data->y + 1][data->x] == 'E' && data->coin == 0)
 			mlxend_free(data);
-		if (data->map[data->y + 1][data->x] == 'E')
-		{
-			data->mov--;
-			return ;
-		}
 		else
 		{
 			data->map[data->y][data->x] = '0';
@@ -62,16 +58,14 @@ static void	key_d(t_maps *data)
 {
 	if (data->map[data->y][data->x + 1] != '1')
 	{
+		if (data->map[data->y][data->x + 1] == 'E' && data->coin != 0)
+			return ;
 		data->mov++;
+		ft_printf("%d\n", data->mov);
 		if (data->map[data->y][data->x + 1] == 'C')
 			data->coin--;
 		if (data->map[data->y][data->x + 1] == 'E' && data->coin == 0)
 			mlxend_free(data);
-		if (data->map[data->y][data->x + 1] == 'E')
-		{
-			data->mov--;
-			return ;
-		}
 		else
 		{
 			data->map[data->y][data->x] = '0';
@@ -85,16 +79,14 @@ static void	key_a(t_maps *data)
 {
 	if (data->map[data->y][data->x - 1] != '1')
 	{
+		if (data->map[data->y][data->x - 1] == 'E' && data->coin != 0)
+			return ;
 		data->mov++;
+		ft_printf("%d\n", data->mov);
 		if (data->map[data->y][data->x - 1] == 'C')
 			data->coin--;
 		if (data->map[data->y][data->x - 1] == 'E' && data->coin == 0)
 			mlxend_free(data);
-		if (data->map[data->y][data->x - 1] == 'E')
-		{
-			data->mov--;
-			return ;
-		}
 		else
 		{
 			data->map[data->y][data->x] = '0';

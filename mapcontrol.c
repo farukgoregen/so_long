@@ -6,7 +6,7 @@
 /*   By: omgorege <omgorege@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:14:03 by omgorege          #+#    #+#             */
-/*   Updated: 2025/01/27 15:56:18 by omgorege         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:25:25 by omgorege         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	map_control3(t_maps *data)
 	while (j < data->rw - 1)
 	{
 		if (data->map[j][0] != '1')
-			ft_error(data);
+			ft_error(data, "The map must be closed");
 		if (data->map[j][i - 1] != '1')
-			ft_error(data);
+			ft_error(data, "The map must be closed");
 		j++;
 	}
 }
@@ -50,14 +50,14 @@ void	map_control2(t_maps *data)
 	while (data->map[0][i])
 	{
 		if (data->map[0][i] != '1')
-			ft_error(data);
+			ft_error(data, "The map must be closed");
 		i++;
 	}
 	i = 0;
 	while (data->map[j - 1][i])
 	{
 		if (data->map[j - 1][i] != '1')
-			ft_error(data);
+			ft_error(data, "The map must be closed");
 		i++;
 	}
 }
@@ -76,11 +76,11 @@ void	map_control1(t_maps *data)
 			i++;
 		}
 		if (data->colon != i)
-			ft_error(data);
+			ft_error(data, "The map must be rectangular");
 		j++;
 	}
 	if (j < 3)
-		ft_error(data);
+		ft_error(data, "Invalid map");
 	map_control2(data);
 	map_control3(data);
 	map_control4(data);
@@ -96,10 +96,9 @@ void	ft_mapadd(char *av, t_maps *data)
 	char	*new_str;
 
 	data->rw = 1;
+	null_error(data, av);
 	fd = open(av, O_RDWR);
 	str = get_next_line(fd);
-	if (str == NULL || str[0] == '\n')
-		null_error(data, str);
 	data->str = ft_strdup(str);
 	free(str);
 	str = get_next_line(fd);
@@ -113,7 +112,5 @@ void	ft_mapadd(char *av, t_maps *data)
 		data->rw++;
 	}
 	free(str);
-	data->map = ft_split(data->str, '\n');
-	data->mapcpy = ft_split(data->str, '\n');
-	free(data->str);
+	map_newline_error(data);
 }

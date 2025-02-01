@@ -6,13 +6,13 @@
 /*   By: omgorege <omgorege@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:01:25 by omgorege          #+#    #+#             */
-/*   Updated: 2025/01/28 10:13:39 by omgorege         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:31:11 by omgorege         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		mlxend_free(t_maps *data)
+int	mlxend_free(t_maps *data)
 {
 	mlx_destroy_image(data->mlx, data->playerml);
 	mlx_destroy_image(data->mlx, data->coinml);
@@ -26,7 +26,6 @@ int		mlxend_free(t_maps *data)
 	free(data->mlx);
 	free(data);
 	write(1, "You closed the game.\n", 21);
-	ft_putnbr_fd(data->mov, 0);
 	exit(0);
 }
 
@@ -39,11 +38,14 @@ void	mlxinit(t_maps *data)
 	data->mlxwin = mlx_new_window(data->mlx, data->colon * 64, data->rw * 64,
 			"Minecraft");
 	data->back = mlx_xpm_file_to_image(data->mlx, "textures/place.xpm", &i, &i);
-	data->wallml = mlx_xpm_file_to_image(data->mlx, "textures/wall.xpm", &i, &i);
+	data->wallml = mlx_xpm_file_to_image(data->mlx, "textures/wall.xpm", &i,
+			&i);
 	data->playerml = mlx_xpm_file_to_image(data->mlx, "textures/player.xpm", &i,
 			&i);
-	data->exitml = mlx_xpm_file_to_image(data->mlx, "textures/exit.xpm", &i, &i);
-	data->coinml = mlx_xpm_file_to_image(data->mlx, "textures/coin.xpm", &i, &i);
+	data->exitml = mlx_xpm_file_to_image(data->mlx, "textures/exit.xpm", &i,
+			&i);
+	data->coinml = mlx_xpm_file_to_image(data->mlx, "textures/coin.xpm", &i,
+			&i);
 	wall_backg_init(data);
 	player_coin_exit_init(data);
 }
@@ -95,4 +97,26 @@ void	player_coin_exit_init(t_maps *data)
 		}
 		i++;
 	}
+}
+
+void	map_newline_error(t_maps *data)
+{
+	int		i;
+	char	a;
+
+	i = ft_strlen(data->str);
+	if (data->str[i - 1] == '\n')
+		ft_free2(data);
+	a = data->str[0];
+	i = 1;
+	while (data->str[i])
+	{
+		if (a == '\n' && data->str[i] == '\n')
+			ft_free2(data);
+		a = data->str[i];
+		i++;
+	}
+	data->map = ft_split(data->str, '\n');
+	data->mapcpy = ft_split(data->str, '\n');
+	free(data->str);
 }

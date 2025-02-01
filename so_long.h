@@ -6,13 +6,14 @@
 /*   By: omgorege <omgorege@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 10:52:03 by omgorege          #+#    #+#             */
-/*   Updated: 2025/01/27 17:08:16 by omgorege         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:53:16 by omgorege         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include "ft_printf/ft_printf.h"
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
@@ -44,7 +45,7 @@ typedef struct st_list
 
 void		ft_mapadd(char *av, t_maps *data);
 void		map_colon(t_maps *data);
-void		ft_error(t_maps *data);
+void		ft_error(t_maps *data, char *msg);
 void		map_control1(t_maps *data);
 void		map_control2(t_maps *data);
 void		map_control3(t_maps *data);
@@ -60,7 +61,8 @@ void		player_coin_exit_init(t_maps *data);
 int			close_window(t_maps *data);
 int			key_press(int key_code, t_maps *data);
 void		ft_free(char **str);
-void		null_error(t_maps *data, char *str);
-int		mlxend_free(t_maps *data);
-void	e_control(t_maps *data);
+void		null_error(t_maps *data, char *av);
+int			mlxend_free(t_maps *data);
+void		map_newline_error(t_maps *data);
+void		ft_free2(t_maps *data);
 #endif
